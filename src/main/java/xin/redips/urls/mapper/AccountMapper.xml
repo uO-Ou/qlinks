@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="xin.redips.urls.dao.AccountDao" >
+
+      <resultMap id="BaseResultMap" type="xin.redips.urls.pojo.Account" >
+          <id column="id" property="id" jdbcType="INTEGER" />
+          <result column="name" property="name"/>
+          <result column="password" property="password" />
+          <result column="mail" property="mail" />
+          <result column="capacity" property="capacity" />
+      </resultMap>
+      
+      <select id="selectUserByName"  parameterType="java.lang.String"  resultMap="BaseResultMap">
+            select * from ACCOUNTS where name = #{name}
+      </select>
+      
+      <select id="selectUserByNameAndPassword" parameterType="xin.redips.urls.pojo.Account" resultMap="BaseResultMap">
+            select * from ACCOUNTS where name = #{name} and password = #{password}
+      </select>
+   
+      <insert id="adduser" useGeneratedKeys="true" keyProperty="id" parameterType="xin.redips.urls.pojo.Account">
+             insert into ACCOUNTS(name,password,mail) values(#{name},#{password},#{mail})
+             <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+                   SELECT LAST_INSERT_ID()
+             </selectKey>
+      </insert>
+      
+      <select id="isUsernameExists" parameterType="java.lang.String" resultType="java.lang.String">
+             select name from ACCOUNTS where name = #{name}
+      </select>
+      
+      <select id="isMailUsed" parameterType="java.lang.String" resultType="java.lang.String">
+             select mail from ACCOUNTS where mail = #{mail}
+      </select>
+      
+      <update id="updatePassById" parameterType="xin.redips.urls.pojo.Account">
+      		update ACCOUNTS set password = #{password} where id = #{id}
+      </update>
+      
+   
+</mapper>

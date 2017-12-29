@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xin.redips.urls.dao.AuthorizationDao" >
+      <resultMap id="BaseResultMap" type="xin.redips.urls.pojo.Authorization" >
+          <id column="id" property="id" jdbcType="INTEGER" />
+          <result column="type" property="type" jdbcType="INTEGER" />
+          <result column="period" property="period" jdbcType="INTEGER"/>
+          <result column="reserved" property="reserved" jdbcType="VARCHAR" />
+          <result column="username" property="username" jdbcType="VARCHAR" />
+          <result column="authcode" property="authcode" jdbcType="VARCHAR" />
+          <result column="effectiveDate" property="effectiveDate" jdbcType="TIMESTAMP"/>
+      </resultMap>
+      
+      <insert id="insertAuthorization" useGeneratedKeys="true" keyProperty="id" parameterType="xin.redips.urls.pojo.Authorization">
+     	insert into AUTHORIZATIONS(type,username,authcode,period) values(#{type},#{username},#{authcode},#{period})
+     	<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+     		select LAST_INSERT_ID()
+     	</selectKey>
+     </insert>
+      
+      <select id="selectAuthorizationByNameAndCode"  parameterType="xin.redips.urls.pojo.Authorization"  resultMap="BaseResultMap">
+            select * from AUTHORIZATIONS where username = #{username} and authcode = #{authcode}
+      </select>
+   
+      <delete id="deleteAuthorizationById" parameterType="java.lang.Integer">
+            delete from AUTHORIZATIONS where id = #{id}
+      </delete> 
+      
+</mapper>

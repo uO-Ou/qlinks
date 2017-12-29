@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xin.redips.urls.dao.LinkDao" >
+      <resultMap id="BaseResultMap" type="xin.redips.urls.pojo.Link" >
+          <id column="id" property="id" jdbcType="INTEGER" />
+          <result column="userId" property="userId" jdbcType="INTEGER" />
+          <result column="url" property="url" jdbcType="VARCHAR" />
+          <result column="hint" property="hint" jdbcType="VARCHAR" />
+          <result column="tag" property="tag" jdbcType="VARCHAR" />
+          <result column="hitCnt" property="hitCnt" jdbcType="INTEGER" />
+          <result column="birth" property="birth" jdbcType="TIMESTAMP"/>
+          <result column="helpInfo" property="helpInfo" jdbcType="VARCHAR"/>
+      </resultMap>
+      
+      <select id="selectUrlsByUserid"  parameterType="java.lang.Integer"  resultMap="BaseResultMap">
+            select * from URLS where userId = #{userId} order by hitCnt desc
+      </select>
+   
+      <insert id="insertUrl" useGeneratedKeys="true" keyProperty="id" parameterType="xin.redips.urls.pojo.Link" >
+            insert into URLS(userId,url,hint,tag) values(#{userId},#{url},#{hint},#{tag})
+            <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+                 select LAST_INSERT_ID();
+            </selectKey>
+      </insert> 
+   
+      <delete id="deleteUrlById" parameterType="java.lang.Integer">
+            delete from URLS where id = #{id}
+      </delete> 
+      
+      <select id="selectTagsByUserid" parameterType="java.lang.Integer" resultType="java.lang.String">
+            select tag from URLS where userId = #{id} group by tag order by sum(hitCnt) desc
+      </select>
+      
+      <update id="incHitCntById" parameterType="java.lang.Integer">
+            update URLS set hitCnt = hitCnt+1 where id = #{id}
+      </update>
+      
+      <update id="modifyUrlById" parameterType="xin.redips.urls.pojo.Link">
+            update URLS set hint=#{hint},helpInfo=#{helpInfo},url=#{url} where id=#{id}
+      </update>
+       
+</mapper>
