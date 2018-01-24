@@ -23,8 +23,9 @@
 </head>
 <body>
     <!-- head -->
+    
 	<br/> <br/>
-	<div class="col-lg-6 col-lg-offset-3">
+	<div class="col-lg-6 col-lg-offset-3 fixed_div">
 	     <div class="row">
 				<div class="form-inline row">
 					<input type="text" class="form-control" id="url_edit" placeholder="http://www.redips.xin/qlinks" style="width:60%;margin-right:2px" /> 
@@ -42,24 +43,11 @@
 		 </div><!-- /.row -->
 	</div>
 	<br/> <br/> <br/><br/> <br/> <br/>
-
-
-	<div class="container-fluid row col-md-12">
+    <!-- head end-->
+    <div class = "row scrolldiv pre-scrollable">
+	<div class="row col-lg-12">
 		<!-- panels -->
-		<div class="col-md-offset-1" id="tags"></div>
-
-		<!-- left control -->
-		<div class="col-md-offset-11 right-container">
-			<div class="content">
-				<img id="people_img" src="<%=request.getContextPath()%>/img/right/people.png" />
-			</div>
-			<div class="content">
-				<img id="album_img" src="<%=request.getContextPath()%>/img/right/album.png" />
-			</div>
-			<div class="content">
-				<img id="home_img" src="<%=request.getContextPath()%>/img/right/home.png" />
-			</div>
-		</div> 
+		<div class="col-md-offset-1 col-lg-12" id="tags"></div>
 	</div>
 
 	<!-- new tag modal -->
@@ -127,6 +115,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

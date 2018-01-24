@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import xin.redips.urls.pojo.Account;
 import xin.redips.urls.pojo.Authorization;
+import xin.redips.urls.pojo.Link;
 import xin.redips.urls.service.AccountService;
 import xin.redips.urls.service.AuthorizationService;
+import xin.redips.urls.service.LinkService;
 import xin.redips.urls.service.LoggerService;
 import xin.redips.urls.service.MailService;
 
@@ -30,6 +32,8 @@ public class AccountController {
 	private AccountService accountService;
 	@Resource
 	private MailService mailService;
+	@Resource
+	private LinkService linkService;
 	@Resource
 	private AuthorizationService authorizationService;
 	@Resource
@@ -69,6 +73,8 @@ public class AccountController {
 			session.setAttribute("account", account);
 	    	session.setMaxInactiveInterval(9000);
 	    	loggerService.logger(name, LoggerService.LOG_OPTYPE_REGIST);
+	    	linkService.insertUrl(new Link(account.getId(),"https://www.baidu.com/","百度","常用链接"));
+	    	linkService.insertUrl(new Link(account.getId(),"http://www.mtime.com/","时光网","常用链接"));
 		}
 		return result;
 	}

@@ -81,7 +81,7 @@ function edit(id){
 	
 	curLinkId_global = ''+id;
 	
-	$("#info_header").html("create time:["+parseDate(linkInfo_global[curLinkId_global].birth)+"] hitted ["+linkInfo_global[curLinkId_global].hitCnt+"] times");
+	$("#info_header").html("添加时间 : ["+parseDate(linkInfo_global[curLinkId_global].birth)+"] 一共点击了 ["+linkInfo_global[curLinkId_global].hitCnt+"] 次");
 
 	$("#info_url").val(linkInfo_global[curLinkId_global].url);
 	
@@ -127,7 +127,7 @@ function remove(id){
 function packtag(tag){
 	return ('<div class="col-md-3 col-sm-12 white" id="tfather_'+tagIdMap_global[tag]+'">' +
 	          '<br/>' +
-	          '<div class="panel panel-default inner_tag" id="cell_'+tagIdMap_global[tag]+'">' +
+	          '<div class="panel panel-default inner_tag pre-scrollable innerwhite" id="cell_'+tagIdMap_global[tag]+'">' +
 	               '<ul class="list-group transparent" id="' + tagIdMap_global[tag] + '">' +
 		               '<li role="presentation" class="li-head-font">'+ tag+ '</li>' +
 	               '</ul>' +

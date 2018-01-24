@@ -28,7 +28,7 @@
       </delete> 
       
       <select id="selectTagsByUserid" parameterType="java.lang.Integer" resultType="java.lang.String">
-            select tag from URLS where userId = #{id} group by tag order by sum(hitCnt) desc
+            select tag from URLS where userId = #{id} group by tag order by max(hitCnt) desc
       </select>
       
       <update id="incHitCntById" parameterType="java.lang.Integer">
